@@ -11,7 +11,6 @@ import {
   Clock3,
   ChevronDown,
   Star,
-  MapPin,
 } from "lucide-react";
 import PhoneStatusBar from "../components/PhoneStatusBar";
 import AndroidBar from "../components/AndroidBar";
@@ -20,12 +19,12 @@ function RouteHeader({ onBack }) {
   return (
     <div className="relative z-20 bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)]">
       <PhoneStatusBar time="7:04" battery="47" />
-      <div className="flex items-center gap-4 px-7 pb-4 pt-8">
+      <div className="grid grid-cols-[46px_1fr_46px] items-center gap-3">
         <button
           onClick={onBack}
-          className="flex h-12 w-12 items-center justify-center active:scale-95"
+          className="flex h-12 w-12 self-start mt-3 items-center justify-center active:scale-95"
         >
-          <ArrowLeft className="h-8 w-8 text-neutral-900" strokeWidth={2.5} />
+          <ArrowLeft className="h-9 w-9 text-neutral-900" strokeWidth={2.4} />
         </button>
         <div className="flex-1 space-y-3">
           <div className="flex h-[66px] items-center rounded-[13px] bg-slate-100 px-8 text-[28px] font-medium tracking-[-1.5px] text-neutral-900">
@@ -40,15 +39,26 @@ function RouteHeader({ onBack }) {
           <Plus className="h-8 w-8 text-neutral-900" />
         </div>
       </div>
-      <div className="flex h-[76px] items-center justify-around px-8 text-[25px] font-semibold">
-        <div className="flex h-[50px] items-center gap-2 rounded-full bg-blue-600 px-7 text-white">
-          <span>🚙</span>
-          <span>30분</span>
+
+      <div className="flex h-[82px] items-center justify-between px-9 text-[25px] font-semibold">
+        <div className="flex h-[54px] min-w-[126px] items-center justify-center gap-2 rounded-full bg-blue-600 px-6 text-white">
+          <span className="text-[28px] leading-none">🚙</span>
+          <span className="text-[27px] font-semibold tracking-[-1px]">
+            34분
+          </span>
         </div>
-        <Bus className="h-8 w-8 fill-neutral-900 text-neutral-900" />
-        <div className="relative">
-          <Footprints className="h-8 w-8 fill-neutral-900 text-neutral-900" />
-          <span className="absolute -right-5 -top-2 text-[18px] font-black text-red-500">
+
+        <Bus
+          className="h-9 w-9 fill-neutral-900 text-neutral-900"
+          strokeWidth={2.4}
+        />
+
+        <div className="relative flex h-12 w-12 items-center justify-center">
+          <Footprints
+            className="h-9 w-9 fill-neutral-900 text-neutral-900"
+            strokeWidth={2.4}
+          />
+          <span className="absolute -right-3 top-0 text-[18px] font-black text-red-500">
             N
           </span>
         </div>
