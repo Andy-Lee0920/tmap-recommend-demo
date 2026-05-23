@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Home,
@@ -14,17 +15,31 @@ import {
 import PhoneStatusBar from "../components/PhoneStatusBar";
 import AndroidBar from "../components/AndroidBar";
 
-function HomeSearchArea() {
+function HomeSearchArea({ onSubmit }) {
+  const [value, setValue] = useState("");
+
+  const handleSubmit = () => {
+    if (value.trim()) onSubmit?.(value);
+  };
+
   return (
     <div className="px-6 pt-3">
       <div className="flex items-center gap-3">
         <div className="flex h-[58px] flex-1 items-center rounded-full border-2 border-blue-500 bg-white px-7 shadow-sm">
-          <span className="flex-1 text-[24px] font-medium tracking-[-1px] text-slate-300">
-            장소, 주소, 맛집, 메뉴 검색
-          </span>
-          <Mic className="h-9 w-9 text-blue-500" strokeWidth={2.5} />
+          <input
+            type="text"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+            placeholder="장소, 주소, 맛집, 메뉴 검색"
+            className="flex-1 bg-transparent text-[24px] font-medium tracking-[-1px] text-neutral-900 outline-none placeholder:text-slate-300"
+          />
+          <Mic className="h-9 w-9 shrink-0 text-blue-500" strokeWidth={2.5} />
         </div>
-        <button className="flex h-[62px] w-[62px] items-center justify-center rounded-full bg-white shadow-[0_4px_12px_rgba(0,0,0,0.16)]">
+        <button
+          onClick={handleSubmit}
+          className="flex h-[62px] w-[62px] shrink-0 items-center justify-center rounded-full bg-white shadow-[0_4px_12px_rgba(0,0,0,0.16)] active:scale-95"
+        >
           <Navigation className="h-9 w-9 fill-blue-600 text-blue-600" />
         </button>
       </div>
@@ -320,7 +335,7 @@ function BottomNav() {
   );
 }
 
-export default function HomeScreen({ onNavigate, showCard }) {
+export default function HomeScreen({ onNavigate, onSearch, showCard }) {
   return (
     <motion.div
       key="home"
@@ -331,7 +346,7 @@ export default function HomeScreen({ onNavigate, showCard }) {
       className="absolute inset-0 bg-slate-50"
     >
       <PhoneStatusBar />
-      <HomeSearchArea />
+      <HomeSearchArea onSubmit={onSearch} />
       <QuickInfo />
       <CoinPromo />
       <MenuGrid />

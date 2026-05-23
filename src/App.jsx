@@ -3,6 +3,7 @@ import { AnimatePresence } from "framer-motion";
 import { Clock } from "lucide-react";
 import HomeScreen from "./screens/HomeScreen";
 import RouteScreen from "./screens/RouteScreen";
+import SearchResultScreen from "./screens/SearchResultScreen";
 
 const BASE_PHONE_WIDTH = 584;
 const BASE_PHONE_HEIGHT = 1260;
@@ -35,7 +36,13 @@ function usePhoneScale() {
 export default function TmapNextDestinationMobileDemo() {
   const [screen, setScreen] = useState("home");
   const [showCard, setShowCard] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const scale = usePhoneScale();
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    setScreen("search");
+  };
 
   return (
     <div className="flex h-[100dvh] w-full items-center justify-center gap-6 overflow-hidden bg-[#0f172a] p-2 font-sans text-neutral-900">
@@ -51,9 +58,23 @@ export default function TmapNextDestinationMobileDemo() {
           style={{ transform: `scale(${scale})` }}
         >
           <AnimatePresence mode="wait">
-            {screen === "home" ? (
-              <HomeScreen key="home" showCard={showCard} onNavigate={() => setScreen("route")} />
-            ) : (
+            {screen === "home" && (
+              <HomeScreen
+                key="home"
+                showCard={showCard}
+                onSearch={handleSearch}
+                onNavigate={() => setScreen("route")}
+              />
+            )}
+            {screen === "search" && (
+              <SearchResultScreen
+                key="search"
+                query={searchQuery}
+                onBack={() => setScreen("home")}
+                onNavigate={() => setScreen("route")}
+              />
+            )}
+            {screen === "route" && (
               <RouteScreen key="route" onBack={() => setScreen("home")} />
             )}
           </AnimatePresence>
