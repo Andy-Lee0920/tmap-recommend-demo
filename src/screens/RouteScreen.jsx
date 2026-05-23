@@ -176,13 +176,13 @@ function FakeMap() {
         </div>
       ))}
 
-      <div className="absolute left-5 top-9 flex h-[60px] w-[315px] items-center gap-3 rounded-full bg-white px-5 shadow-md">
-        <span className="text-[13px] font-black">
+      <div className="absolute left-5 top-9 flex h-[52px] w-[290px] items-center gap-3 rounded-full bg-white px-5 shadow-md">
+        <span className="text-[12px] font-black leading-tight">
           KUMHO
           <br />
           TIRE
         </span>
-        <span className="text-[24px] font-semibold tracking-[-1px] text-neutral-700">
+        <span className="whitespace-nowrap text-[18px] font-semibold tracking-[-0.5px] text-neutral-700">
           CRUGEN GT Pro 출시
         </span>
       </div>
@@ -225,10 +225,10 @@ function FakeMap() {
         </MapButton>
       </div>
 
-      <div className="absolute right-0 top-[566px] flex h-[75px] w-[245px] items-center gap-4 rounded-full bg-white px-5 shadow-xl">
-        <div className="text-[58px] leading-none">🚙</div>
-        <div className="text-[29px] font-bold text-blue-600">2243</div>
-        <ChevronDown className="h-6 w-6 text-neutral-500" />
+      <div className="absolute right-0 top-[576px] flex h-[62px] w-[210px] items-center gap-3 rounded-full bg-white px-4 shadow-xl">
+        <div className="text-[46px] leading-none">🚙</div>
+        <div className="text-[24px] font-bold text-blue-600">2243</div>
+        <ChevronDown className="h-5 w-5 text-neutral-500" />
       </div>
     </div>
   );
@@ -236,59 +236,59 @@ function FakeMap() {
 
 function RouteOptionCards() {
   return (
-    <div className="absolute bottom-[113px] left-0 right-0 z-10">
-      <div className="flex gap-4 overflow-hidden px-8">
-        <div className="h-[198px] w-[245px] shrink-0 rounded-[16px] border-[3px] border-blue-600 bg-white p-5 shadow-lg">
+    <div className="absolute bottom-[120px] left-0 right-0 z-10">
+      <div className="flex gap-3 overflow-hidden px-7">
+        <div className="h-[175px] w-[225px] shrink-0 rounded-[14px] border-[3px] border-blue-600 bg-white p-4 shadow-lg">
           <div className="flex items-center gap-2">
-            <span className="text-[24px] font-extrabold text-blue-600">
+            <span className="whitespace-nowrap text-[19px] font-extrabold text-blue-600">
               티맵추천
             </span>
-            <span className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-pink-400 text-[13px] font-black text-neutral-900">
+            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-pink-400 text-[11px] font-black text-neutral-900">
               AI
             </span>
-            <button className="ml-auto rounded-[10px] border border-slate-200 px-3 py-1 text-[19px] font-medium text-slate-500">
+            <button className="ml-auto rounded-[8px] border border-slate-200 px-2 py-1 text-[14px] font-medium text-slate-500">
               상세
             </button>
           </div>
-          <div className="mt-3 text-[43px] font-black leading-none text-neutral-900">
+          <div className="mt-2 text-[36px] font-black leading-none text-neutral-900">
             30분
           </div>
-          <div className="mt-3 text-[24px] font-bold tracking-[-1px] text-neutral-700">
+          <div className="mt-2 text-[19px] font-bold tracking-[-0.5px] text-neutral-700">
             오후 7:34 도착
           </div>
-          <div className="mt-2 text-[22px] font-semibold tracking-[-1px] text-neutral-500">
+          <div className="mt-1 text-[16px] font-semibold tracking-[-0.5px] text-neutral-500">
             10km · 통행료 없음
           </div>
         </div>
 
-        <div className="h-[198px] w-[245px] shrink-0 rounded-[16px] border border-slate-200 bg-white p-5 shadow-lg">
+        <div className="h-[175px] w-[225px] shrink-0 rounded-[14px] border border-slate-200 bg-white p-4 shadow-lg">
           <div className="flex items-center gap-2">
-            <span className="text-[24px] font-extrabold text-neutral-500">
+            <span className="whitespace-nowrap text-[19px] font-extrabold text-neutral-500">
               무료도로 우선
             </span>
-            <button className="ml-auto rounded-[10px] border border-slate-200 px-3 py-1 text-[19px] font-medium text-slate-500">
+            <button className="ml-auto rounded-[8px] border border-slate-200 px-2 py-1 text-[14px] font-medium text-slate-500">
               상세
             </button>
           </div>
-          <div className="mt-5 text-[43px] font-black leading-none text-neutral-900">
+          <div className="mt-3 text-[36px] font-black leading-none text-neutral-900">
             30분
           </div>
-          <div className="mt-3 text-[24px] font-bold tracking-[-1px] text-neutral-700">
+          <div className="mt-2 text-[19px] font-bold tracking-[-0.5px] text-neutral-700">
             오후 7:34 도착
           </div>
-          <div className="mt-2 text-[22px] font-semibold tracking-[-1px] text-neutral-500">
+          <div className="mt-1 text-[16px] font-semibold tracking-[-0.5px] text-neutral-500">
             10km · 통행료 없음
           </div>
         </div>
 
-        <div className="h-[198px] w-[245px] shrink-0 rounded-[16px] border border-slate-200 bg-white p-5 shadow-lg opacity-70">
-          <div className="text-[24px] font-extrabold text-neutral-500">
+        <div className="h-[175px] w-[225px] shrink-0 rounded-[14px] border border-slate-200 bg-white p-4 shadow-lg opacity-70">
+          <div className="text-[19px] font-extrabold text-neutral-500">
             최단거리
           </div>
-          <div className="mt-5 text-[43px] font-black leading-none text-neutral-900">
+          <div className="mt-3 text-[36px] font-black leading-none text-neutral-900">
             29분
           </div>
-          <div className="mt-3 text-[24px] font-bold tracking-[-1px] text-neutral-700">
+          <div className="mt-2 text-[19px] font-bold tracking-[-0.5px] text-neutral-700">
             오후 7:33 도착
           </div>
         </div>
@@ -299,13 +299,13 @@ function RouteOptionCards() {
 
 function StartGuideBar() {
   return (
-    <div className="absolute bottom-0 left-0 right-0 z-20 bg-white/70 pb-[62px] pt-4 backdrop-blur-[2px]">
-      <div className="mx-8 flex h-[84px] items-center gap-4">
-        <button className="flex h-[80px] w-[88px] items-center justify-center rounded-[12px] bg-slate-400 text-white">
-          <Clock3 className="h-10 w-10 fill-white" />
+    <div className="absolute bottom-0 left-0 right-0 z-20 bg-white/70 pb-[62px] pt-3 backdrop-blur-[2px]">
+      <div className="mx-8 flex h-[72px] items-center gap-3">
+        <button className="flex h-[68px] w-[76px] items-center justify-center rounded-[12px] bg-slate-400 text-white">
+          <Clock3 className="h-8 w-8 fill-white" />
         </button>
-        <button className="flex h-[80px] flex-1 items-center justify-center gap-7 rounded-[12px] bg-blue-600 text-[32px] font-black tracking-[-1px] text-white">
-          <span className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white text-[23px]">
+        <button className="flex h-[68px] flex-1 items-center justify-center gap-5 rounded-[12px] bg-blue-600 text-[26px] font-black tracking-[-1px] text-white">
+          <span className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-white text-[19px]">
             11
           </span>
           안내시작
