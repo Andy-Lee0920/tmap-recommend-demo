@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Home,
   Building2,
@@ -144,15 +144,116 @@ function MenuGrid() {
   );
 }
 
+const reviewData = [
+  {
+    id: 1,
+    avatar: "👨‍💼",
+    name: "김**",
+    similarity: "94%",
+    stars: 5,
+    label: "고속도로 진입 회피",
+    text: "고속도로 진입 전 우회로 추천이 딱 맞았어요. 퇴근길 시간 많이 아꼈어요!",
+    time: "2시간 전",
+  },
+  {
+    id: 2,
+    avatar: "👩‍💻",
+    name: "이**",
+    similarity: "91%",
+    stars: 4,
+    label: "러시아워 우회",
+    text: "퇴근 시간대 막히는 구간 자동 우회가 정말 편해요.",
+    time: "5시간 전",
+  },
+  {
+    id: 3,
+    avatar: "🧑",
+    name: "박**",
+    similarity: "88%",
+    stars: 5,
+    label: "야간 운전 주의",
+    text: "비슷한 운전 패턴인 분들 추천 경로가 실제로 도움이 됐어요.",
+    time: "1일 전",
+  },
+];
+
+function SimilarReviews() {
+  return (
+    <div className="px-5 pt-5">
+      <div className="overflow-hidden rounded-[24px] bg-white shadow-[0_8px_18px_rgba(15,23,42,0.10)]">
+        <div className="flex items-center justify-between px-7 pb-4 pt-6">
+          <div>
+            <div className="text-[20px] font-extrabold tracking-[-0.8px] text-neutral-900">
+              나와 비슷한 취약의 리뷰
+            </div>
+            <div className="mt-1 text-[15px] font-medium tracking-[-0.4px] text-neutral-400">
+              유사 운전 패턴 사용자들의 후기
+            </div>
+          </div>
+          <button className="flex items-center text-[16px] font-semibold text-blue-500">
+            전체보기
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        </div>
+
+        <div className="flex gap-4 overflow-x-auto px-7 pb-7 [scrollbar-width:none]">
+          {reviewData.map((review) => (
+            <div
+              key={review.id}
+              className="w-[240px] shrink-0 rounded-[16px] border border-slate-100 bg-slate-50 p-5"
+            >
+              <div className="flex items-center gap-3">
+                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-[26px] shadow-sm">
+                  {review.avatar}
+                </div>
+                <div>
+                  <div className="text-[17px] font-bold tracking-[-0.5px] text-neutral-900">
+                    {review.name}
+                  </div>
+                  <div className="text-[13px] font-semibold text-blue-500">
+                    유사도 {review.similarity}
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-3 inline-block rounded-full bg-blue-50 px-3 py-1 text-[13px] font-semibold text-blue-600">
+                {review.label}
+              </div>
+
+              <div className="mt-2 flex gap-0.5">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star
+                    key={i}
+                    className={`h-4 w-4 ${i < review.stars ? "fill-yellow-400 text-yellow-400" : "fill-slate-200 text-slate-200"}`}
+                  />
+                ))}
+              </div>
+
+              <div className="mt-2 text-[15px] font-medium leading-[1.45] tracking-[-0.4px] text-neutral-700">
+                {review.text}
+              </div>
+
+              <div className="mt-3 text-[13px] text-neutral-400">
+                {review.time}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function RecommendationCard({ onNavigate }) {
   return (
-    <div className="relative px-4 pt-4">
-      <motion.div
-        initial={{ y: 14, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.45 }}
-        className="relative rounded-[15px] border border-slate-200 bg-white p-8 shadow-[0_0_8px_rgba(0,0,0,0.30)]"
-      >
+    <motion.div
+      initial={{ y: 80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: 80, opacity: 0 }}
+      transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+      className="absolute bottom-[160px] left-0 right-0 z-10 px-4"
+    >
+      <div className="relative rounded-[15px] border border-slate-200 bg-white p-8 shadow-[0_0_8px_rgba(0,0,0,0.30)]">
         <div className="max-w-[360px] text-[28px] font-medium leading-[1.28] tracking-[-1.5px] text-black">
           평일 오후 6시 30분 이네요!
           <br />
@@ -172,8 +273,8 @@ function RecommendationCard({ onNavigate }) {
         <div className="absolute bottom-5 right-8 text-[112px] leading-none">
           🏠
         </div>
-      </motion.div>
-    </div>
+      </div>
+    </motion.div>
   );
 }
 
@@ -219,7 +320,7 @@ function BottomNav() {
   );
 }
 
-export default function HomeScreen({ onNavigate }) {
+export default function HomeScreen({ onNavigate, showCard }) {
   return (
     <motion.div
       key="home"
@@ -234,7 +335,12 @@ export default function HomeScreen({ onNavigate }) {
       <QuickInfo />
       <CoinPromo />
       <MenuGrid />
-      <RecommendationCard onNavigate={onNavigate} />
+      <SimilarReviews />
+
+      <AnimatePresence>
+        {showCard && <RecommendationCard onNavigate={onNavigate} />}
+      </AnimatePresence>
+
       <BottomNav />
     </motion.div>
   );
