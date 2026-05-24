@@ -4,6 +4,7 @@ import { Clock } from "lucide-react";
 import HomeScreen from "./screens/HomeScreen";
 import RouteScreen from "./screens/RouteScreen";
 import SearchResultScreen from "./screens/SearchResultScreen";
+import NavigationScreen from "./screens/NavigationScreen";
 
 const BASE_PHONE_WIDTH = 584;
 const BASE_PHONE_HEIGHT = 1260;
@@ -75,14 +76,24 @@ export default function TmapNextDestinationMobileDemo() {
               />
             )}
             {screen === "route" && (
-              <RouteScreen key="route" onBack={() => setScreen("home")} />
+              <RouteScreen
+                key="route"
+                onBack={() => setScreen("home")}
+                onStartNav={() => setScreen("navigate")}
+              />
+            )}
+            {screen === "navigate" && (
+              <NavigationScreen
+                key="navigate"
+                onBack={() => setScreen("home")}
+              />
             )}
           </AnimatePresence>
         </div>
       </div>
 
       <div className="flex w-[220px] shrink-0 flex-col gap-4 rounded-2xl border border-slate-700 bg-[#1e293b] p-6 shadow-xl">
-        <div className="text-[11px] font-bold uppercase tracking-widest text-slate-400">
+        <div className="text-2xs font-bold uppercase tracking-widest text-slate-400">
           시나리오 제어
         </div>
 
@@ -99,14 +110,14 @@ export default function TmapNextDestinationMobileDemo() {
         >
           <Clock className="h-5 w-5 shrink-0" />
           <div>
-            <div className={`text-[11px] font-semibold ${showCard ? "text-blue-200" : "text-slate-400"}`}>
+            <div className={`text-2xs font-semibold ${showCard ? "text-blue-200" : "text-slate-400"}`}>
               시간 트리거
             </div>
-            <div className="text-[14px] font-bold">오후 6:30 도착</div>
+            <div className="text-sm font-bold">오후 6:30 도착</div>
           </div>
         </button>
 
-        <p className="text-[11px] leading-relaxed text-slate-500">
+        <p className="text-2xs leading-relaxed text-slate-500">
           {showCard
             ? "추천 카드가 표시 중입니다."
             : "버튼을 누르면 퇴근 추천 카드가 앱에 표시됩니다."}
