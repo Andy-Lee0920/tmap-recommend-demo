@@ -9,7 +9,6 @@ import {
   Clock,
   Car,
   Tag,
-  Sparkles,
 } from "lucide-react";
 import PhoneStatusBar from "../components/PhoneStatusBar";
 import AndroidBar from "../components/AndroidBar";
@@ -97,7 +96,7 @@ function SearchBox({ onBack }) {
             strokeWidth={2.5}
           />
         </button>
-        <span className="flex-1 text-[24px] font-black tracking-[-0.8px] text-neutral-900">
+        <span className="flex-1 text-[24px] font-medium tracking-[-0.8px] text-neutral-900">
           롯데마트
         </span>
         <button className="flex h-[24px] w-[24px] items-center justify-center rounded-full bg-neutral-400">
@@ -115,20 +114,20 @@ function FilterTabs() {
   return (
     <div className="sticky top-0 z-10 border-b border-neutral-100 bg-white">
       <div className="mx-auto mt-2 h-1 w-9 rounded-full bg-neutral-200" />
-      <div className="flex h-[62px] items-center justify-between px-4">
-        <div className="flex h-full items-center gap-6 text-[16px] font-semibold">
+      <div className="flex h-[68px] items-center justify-between px-4">
+        <div className="flex h-full items-center gap-6 text-[20px] font-semibold">
           <div className="flex h-full items-center border-b-2 border-neutral-900 text-neutral-900">
             장소
           </div>
           <div className="text-neutral-400">버스</div>
           <div className="text-neutral-400">정류장</div>
         </div>
-        <div className="flex items-center gap-4 text-[13px] font-semibold text-neutral-600">
+        <div className="flex items-center gap-4 text-[16px] font-semibold text-neutral-600">
           <button className="flex items-center gap-0.5">
-            지도중심 <ChevronDown className="h-4 w-4" />
+            지도중심 <ChevronDown className="h-5 w-5" />
           </button>
           <button className="flex items-center gap-0.5">
-            정확도순 <ChevronDown className="h-4 w-4" />
+            정확도순 <ChevronDown className="h-5 w-5" />
           </button>
         </div>
       </div>
@@ -141,44 +140,58 @@ function FilterTabs() {
 // ─────────────────────────────────────────────
 function PlaceCard({ variant = "primary" }) {
   const isAlt = variant === "alternative";
+  const isParking = variant === "parking";
+
+  const name = isParking
+    ? "롯데마트 지하주차장"
+    : isAlt
+      ? "이마트 왕십리점"
+      : "롯데마트 강변점";
+  const badge = isParking ? "주차장" : "대형마트";
 
   return (
-    <div className="bg-white px-4 py-4">
+    <div className="bg-white px-4 py-5">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0 flex-1">
-          <div className="flex items-baseline gap-1.5">
-            <h3 className="text-[20px] font-black tracking-[-0.7px] text-neutral-950">
-              {isAlt ? "이마트 왕십리점" : "롯데마트 강변점"}
+          <div className="flex items-baseline gap-2">
+            <h3
+              className={
+                isParking
+                  ? "text-[20px] font-medium tracking-[-0.3px] text-[#1a1a1a]"
+                  : "text-[22px] font-medium tracking-[-0.7px] text-neutral-950"
+              }
+            >
+              {name}
             </h3>
-            <span className="text-[12px] font-medium text-neutral-400">
-              대형마트
+            <span className="text-[15px] font-medium text-neutral-400">
+              {badge}
             </span>
           </div>
-          <div className="mt-1 text-[15px] font-medium tracking-[-0.3px] text-neutral-500">
+          <div className="mt-1 text-[18px] font-medium tracking-[-0.3px] text-neutral-500">
             2km · 서울 광진구 광나루로56길 85
           </div>
-          <div className="mt-1 flex items-center gap-1.5 text-[15px] font-semibold">
+          <div className="mt-1 flex items-center gap-1.5 text-[18px] font-semibold">
             <span className="text-emerald-600">영업중</span>
-            <Star className="h-[14px] w-[14px] fill-emerald-400 text-emerald-400" />
+            <Star className="h-[17px] w-[17px] fill-emerald-400 text-emerald-400" />
             <span className="text-neutral-800">4.4</span>
             <span className="font-normal text-neutral-400">(17)</span>
           </div>
-          <div className="mt-1 text-[13px] font-medium text-red-500">
+          <div className="mt-1 text-[16px] font-medium text-red-500">
             휴무 05.24(일)
           </div>
           <div className="mt-2.5 flex items-center gap-1.5">
-            <span className="inline-flex items-center gap-1 rounded-[6px] bg-neutral-100 px-2 py-[3px] text-[12px] font-medium text-neutral-500">
-              <Car className="h-[12px] w-[12px]" /> 주차
+            <span className="inline-flex items-center gap-1 rounded-[6px] bg-neutral-100 px-2 py-[3px] text-[15px] font-medium text-neutral-500">
+              <Car className="h-[15px] w-[15px]" /> 주차
             </span>
-            {!isAlt && (
-              <span className="inline-flex items-center gap-1 rounded-[6px] bg-neutral-100 px-2 py-[3px] text-[12px] font-medium text-neutral-500">
-                <Clock className="h-[12px] w-[12px]" /> 24시간
+            {!isAlt && !isParking && (
+              <span className="inline-flex items-center gap-1 rounded-[6px] bg-neutral-100 px-2 py-[3px] text-[15px] font-medium text-neutral-500">
+                <Clock className="h-[15px] w-[15px]" /> 24시간
               </span>
             )}
           </div>
         </div>
-        <button className="mt-0.5 flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-full bg-blue-600 text-white">
-          <Navigation className="h-5 w-5 fill-white text-white" />
+        <button className="mt-0.5 flex h-[54px] w-[54px] shrink-0 items-center justify-center rounded-full bg-blue-600 text-white">
+          <Navigation className="h-6 w-6 fill-white text-white" />
         </button>
       </div>
     </div>
@@ -191,21 +204,21 @@ function PlaceCard({ variant = "primary" }) {
 function ParkingBox({ count = 4, name = "1주차장" }) {
   return (
     <div className="mx-3.5 mb-4 overflow-hidden rounded-[12px] border border-neutral-200 bg-white">
-      <div className="flex h-[56px] items-center gap-2.5 px-4">
-        <div className="flex h-[20px] w-[20px] shrink-0 items-center justify-center rounded-full bg-neutral-600 text-[11px] font-bold text-white">
+      <div className="flex h-[64px] items-center gap-2.5 px-4">
+        <div className="flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-full bg-neutral-600 text-[14px] font-bold text-white">
           1
         </div>
-        <span className="flex-1 text-[16px] font-bold tracking-[-0.3px] text-neutral-800">
+        <span className="flex-1 text-[19px] font-bold tracking-[-0.3px] text-neutral-800">
           {name}
         </span>
-        <button className="flex h-[34px] w-[34px] items-center justify-center rounded-full border border-blue-200 text-blue-600">
-          <Navigation className="h-4 w-4" />
+        <button className="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-blue-200 text-blue-600">
+          <Navigation className="h-5 w-5" />
         </button>
       </div>
-      <div className="flex h-[44px] items-center justify-center gap-1 border-t border-neutral-100 bg-neutral-50 text-[15px] font-medium text-neutral-500">
+      <div className="flex h-[52px] items-center justify-center gap-1 border-t border-neutral-100 bg-neutral-50 text-[18px] font-medium text-neutral-500">
         진입장소 더보기{" "}
         <span className="font-semibold text-blue-600">{count}</span>
-        <ChevronDown className="h-4 w-4 text-blue-500" />
+        <ChevronDown className="h-5 w-5 text-blue-500" />
       </div>
     </div>
   );
@@ -216,74 +229,102 @@ function ParkingBox({ count = 4, name = "1주차장" }) {
 // ─────────────────────────────────────────────
 function PayAd() {
   return (
-    <div className="flex items-center gap-3 border-y border-neutral-100 bg-neutral-50 px-4 py-3">
+    <div className="flex items-center gap-3 border-y border-neutral-100 bg-neutral-50 px-4 py-4">
       <div className="min-w-0 flex-1">
-        <div className="text-[12px] font-semibold text-blue-600">
+        <div className="text-[15px] font-semibold text-blue-600">
           Npay앱 다운받기 ›
         </div>
-        <div className="mt-0.5 text-[17px] font-black tracking-[-0.5px] text-neutral-800">
+        <div className="mt-0.5 text-[20px] font-black tracking-[-0.5px] text-neutral-800">
           네이버페이 X 삼성페이
         </div>
-        <div className="mt-1 text-[11px] text-neutral-400">
-          <span className="rounded bg-neutral-300 px-1 py-px text-[10px] text-white">
+        <div className="mt-1 text-[14px] text-neutral-400">
+          <span className="rounded bg-neutral-300 px-1 py-px text-[13px] text-white">
             AD
           </span>{" "}
           Moloco 광고입니다.
         </div>
       </div>
-      <div className="flex h-[50px] w-[96px] shrink-0 items-center justify-center rounded-[10px] bg-neutral-900">
-        <span className="text-[18px] font-black text-white">
+      <div className="flex h-[58px] w-[108px] shrink-0 items-center justify-center rounded-[10px] bg-neutral-900">
+        <span className="text-[21px] font-black text-white">
           <span className="text-[#03c75a]">N</span> pay
         </span>
       </div>
-      <Info className="h-[18px] w-[18px] shrink-0 text-neutral-300" />
+      <Info className="h-[22px] w-[22px] shrink-0 text-neutral-300" />
     </div>
   );
 }
 
 // ─────────────────────────────────────────────
-// Recommendation Banner
+// Ad Card (이마트 왕십리점 스폰서)
 // ─────────────────────────────────────────────
-function RecommendationBanner() {
+function AdCard() {
   return (
-    <div className="mx-3 mb-2.5 mt-3 flex items-center gap-3 rounded-[14px] border-[1.5px] border-blue-500 bg-white px-4 py-3">
-      <div className="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-[10px] bg-blue-50">
-        <Sparkles className="h-[18px] w-[18px] text-blue-600" />
-      </div>
-      <div>
-        <div className="text-[16px] font-bold tracking-[-0.4px] text-neutral-900">
-          잠깐! 근처 이마트는 어떠세요?
+    <div className="mx-3.5 my-3 overflow-hidden rounded-[12px] border-2 border-orange-200 bg-white">
+      {/* 본문 */}
+      <div className="px-3 pt-3">
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-2">
+              <h3 className="text-[21px] font-black tracking-[-0.5px] text-neutral-950">
+                이마트 왕십리점
+              </h3>
+              <span className="rounded-[4px] bg-[#0068e1] px-1.5 py-0.5 text-[13px] font-bold text-white">
+                AD
+              </span>
+            </div>
+            <div className="mt-1 text-[16px] font-medium text-neutral-500">
+              서울 성동구 왕십리광장로 17
+            </div>
+            <div className="mt-1 flex items-center gap-1.5 text-[16px] font-semibold">
+              <span className="text-emerald-600">영업중</span>
+              <Star className="h-[16px] w-[16px] fill-emerald-400 text-emerald-400" />
+              <span className="text-neutral-800">4.5</span>
+              <span className="font-normal text-neutral-400">(42)</span>
+            </div>
+            <div className="mt-0.5 text-[15px] font-medium text-red-500">
+              휴무 05.25(월)
+            </div>
+          </div>
+          <div className="flex h-[64px] w-[64px] shrink-0 items-center justify-center rounded-[10px] bg-[#0068e1] overflow-hidden">
+            <img
+              src="/image/emart-logo.png"
+              alt="이마트"
+              className="h-full w-full object-cover"
+            />
+          </div>
         </div>
-        <div className="mt-0.5 text-[13px] font-medium text-blue-500">
-          성격 기반 대체 목적지 추천
-        </div>
       </div>
-    </div>
-  );
-}
 
-// ─────────────────────────────────────────────
-// Coupon / Info Buttons
-// ─────────────────────────────────────────────
-function CouponButtons() {
-  return (
-    <div className="grid grid-cols-2 gap-2 px-3.5 pb-2 pt-1">
-      <button className="flex items-center gap-1.5 rounded-[8px] bg-blue-600 px-3 py-2">
-        <Clock className="h-3.5 w-3.5 shrink-0 text-blue-200" />
-        <span className="text-left text-[13px] font-semibold leading-[1.35] text-white">
-          롯데마트보다
-          <br />
-          5분 더 걸려요
+      {/* 구분선 */}
+      <div className="mx-3 mb-2.5 mt-3 h-px bg-neutral-100" />
+
+      {/* 프로모션 pills */}
+      <div className="flex flex-wrap gap-2 px-3 pb-3">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-orange-500  px-3 py-1.5 text-[14px] font-semibold text-white">
+          <Clock className="h-4 w-4 shrink-0" />
+          롯데마트보다 5분 더 걸려요
         </span>
-      </button>
-      <button className="flex items-center gap-1.5 rounded-[8px] bg-emerald-600 px-3 py-2">
-        <Tag className="h-3.5 w-3.5 shrink-0 text-emerald-200" />
-        <span className="text-left text-[13px] font-semibold leading-[1.35] text-white">
-          소고기 10% 할인
-          <br />
-          쿠폰 지급 중!
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-orange-500 px-3 py-1.5 text-[14px] font-semibold text-white">
+          <Tag className="h-4 w-4 shrink-0" />
+          소고기 10% 할인 쿠폰 지급 중!
         </span>
-      </button>
+      </div>
+
+      {/* 하단 */}
+      <div className="border-t border-neutral-100 px-3 py-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-1.5 text-[16px] text-neutral-500">
+            <Car className="h-5 w-5 shrink-0" />
+            <span className="font-medium">옥외지상주차장</span>
+          </div>
+          <button className="rounded-[20px] bg-[#0068e1] px-5 py-2 text-[16px] font-bold text-white active:scale-95">
+            길 안내
+          </button>
+        </div>
+        <button className="mt-2 text-[15px] font-semibold text-[#0068e1]">
+          진입장소 더보기 6 ›
+        </button>
+      </div>
     </div>
   );
 }
@@ -310,12 +351,11 @@ function ResultsSheet() {
           <PayAd />
         </div>
 
-        <div className="bg-white">
-          <RecommendationBanner />
-          <CouponButtons />
-          <div className="mx-3.5 my-2 h-px bg-neutral-100" />
-          <PlaceCard variant="alternative" />
-          <ParkingBox count={6} name="옥외지상주차장" />
+        <AdCard />
+
+        <div className="mb-[7px] bg-white">
+          <PlaceCard variant="parking" />
+          <ParkingBox count={2} name="B1 입구" />
         </div>
       </div>
     </motion.div>
