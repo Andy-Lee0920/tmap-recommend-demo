@@ -5,7 +5,7 @@ import {
   Star,
   Navigation,
   ChevronDown,
-  Info,
+  // Info,
   Clock,
   Car,
   Tag,
@@ -141,12 +141,15 @@ function FilterTabs() {
 function PlaceCard({ variant = "primary" }) {
   const isAlt = variant === "alternative";
   const isParking = variant === "parking";
+  const isZetaplex = variant === "zetaplex";
 
   const name = isParking
     ? "롯데마트 지하주차장"
-    : isAlt
-      ? "이마트 왕십리점"
-      : "롯데마트 강변점";
+    : isZetaplex
+      ? "롯데마트 제타플렉스점"
+      : isAlt
+        ? "이마트 왕십리점"
+        : "롯데마트 강변점";
   const badge = isParking ? "주차장" : "대형마트";
 
   return (
@@ -156,7 +159,7 @@ function PlaceCard({ variant = "primary" }) {
           <div className="flex items-baseline gap-2">
             <h3
               className={
-                isParking
+                isParking || isZetaplex
                   ? "text-lg font-medium tracking-[-0.3px] text-[#1a1a1a]"
                   : "text-xl font-medium tracking-[-0.7px] text-neutral-950"
               }
@@ -183,7 +186,7 @@ function PlaceCard({ variant = "primary" }) {
             <span className="inline-flex items-center gap-1 rounded-[6px] bg-neutral-100 px-2 py-[3px] text-sm font-medium text-neutral-500">
               <Car className="h-[15px] w-[15px]" /> 주차
             </span>
-            {!isAlt && !isParking && (
+            {!isAlt && !isParking && !isZetaplex && (
               <span className="inline-flex items-center gap-1 rounded-[6px] bg-neutral-100 px-2 py-[3px] text-sm font-medium text-neutral-500">
                 <Clock className="h-[15px] w-[15px]" /> 24시간
               </span>
@@ -224,35 +227,35 @@ function ParkingBox({ count = 4, name = "1주차장" }) {
   );
 }
 
-// ─────────────────────────────────────────────
-// Ad Strip
-// ─────────────────────────────────────────────
-function PayAd() {
-  return (
-    <div className="flex items-center gap-3 border-y border-neutral-100 bg-neutral-50 px-4 py-4">
-      <div className="min-w-0 flex-1">
-        <div className="text-sm font-semibold text-blue-600">
-          Npay앱 다운받기 ›
-        </div>
-        <div className="mt-0.5 text-lg font-black tracking-[-0.5px] text-neutral-800">
-          네이버페이 X 삼성페이
-        </div>
-        <div className="mt-1 text-sm text-neutral-400">
-          <span className="rounded bg-neutral-300 px-1 py-px text-xs text-white">
-            AD
-          </span>{" "}
-          Moloco 광고입니다.
-        </div>
-      </div>
-      <div className="flex h-[58px] w-[108px] shrink-0 items-center justify-center rounded-[10px] bg-neutral-900">
-        <span className="text-xl font-black text-white">
-          <span className="text-[#03c75a]">N</span> pay
-        </span>
-      </div>
-      <Info className="h-[22px] w-[22px] shrink-0 text-neutral-300" />
-    </div>
-  );
-}
+// // ─────────────────────────────────────────────
+// // Ad Strip
+// // ─────────────────────────────────────────────
+// function PayAd() {
+//   return (
+//     <div className="flex items-center gap-3 border-y border-neutral-100 bg-neutral-50 px-4 py-4">
+//       <div className="min-w-0 flex-1">
+//         <div className="text-sm font-semibold text-blue-600">
+//           Npay앱 다운받기 ›
+//         </div>
+//         <div className="mt-0.5 text-lg font-black tracking-[-0.5px] text-neutral-800">
+//           네이버페이 X 삼성페이
+//         </div>
+//         <div className="mt-1 text-sm text-neutral-400">
+//           <span className="rounded bg-neutral-300 px-1 py-px text-xs text-white">
+//             AD
+//           </span>{" "}
+//           Moloco 광고입니다.
+//         </div>
+//       </div>
+//       <div className="flex h-[58px] w-[108px] shrink-0 items-center justify-center rounded-[10px] bg-neutral-900">
+//         <span className="text-xl font-black text-white">
+//           <span className="text-[#03c75a]">N</span> pay
+//         </span>
+//       </div>
+//       <Info className="h-[22px] w-[22px] shrink-0 text-neutral-300" />
+//     </div>
+//   );
+// }
 
 // ─────────────────────────────────────────────
 // Ad Card (이마트 왕십리점 스폰서)
@@ -347,15 +350,16 @@ function ResultsSheet() {
           <ParkingBox />
         </div>
 
-        <div className="mb-[7px] bg-white">
-          <PayAd />
-        </div>
-
         <AdCard />
 
         <div className="mb-[7px] bg-white">
           <PlaceCard variant="parking" />
           <ParkingBox count={2} name="B1 입구" />
+        </div>
+
+        <div className="mb-[7px] bg-white">
+          <PlaceCard variant="zetaplex" />
+          <ParkingBox count={3} name="지하 1층" />
         </div>
       </div>
     </motion.div>
