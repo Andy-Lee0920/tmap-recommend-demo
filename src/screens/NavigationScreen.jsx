@@ -555,7 +555,7 @@ function GasStationBottomSheet() {
             </div>
 
             {/* 가격 배지 - 글씨 크기 그대로 유지 */}
-            <div className="shrink-0 whitespace-nowrap rounded-[4px] bg-[#0068ff] px-2 py-1 text-2xs font-bold text-white">
+            <div className="shrink-0 whitespace-nowrap rounded-[4px] bg-[#0068ff] px-2 py-1 text-sm font-bold text-white">
               {station.price}
             </div>
           </div>
