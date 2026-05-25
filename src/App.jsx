@@ -126,7 +126,6 @@ export default function TmapNextDestinationMobileDemo() {
             >
               시간 트리거
             </div>
-            <div className="text-sm font-bold">오후 6:30 도착</div>
           </div>
         </button>
 
@@ -140,7 +139,7 @@ export default function TmapNextDestinationMobileDemo() {
           <select
             value={cluster}
             onChange={(e) => setCluster(e.target.value)}
-            className="w-full cursor-pointer rounded-lg bg-slate-600 px-3 py-2 text-sm font-semibold text-slate-100 outline-none"
+            className="w-full cursor-pointer rounded-lg bg-slate-600 px-3 py-2 text-xs font-semibold text-slate-100 outline-none"
           >
             {clusterOptions.map((opt) => (
               <option key={opt.value} value={opt.value}>

@@ -291,7 +291,38 @@ function PayAd() {
   );
 }
 
-function RecommendationCard({ onNavigate }) {
+const CARD_VARIANTS = {
+  parenting: {
+    message: (
+      <>
+        평일 오전 8시 입니다.
+        <br />
+        오늘도 어린이집으로
+        <br />
+        <b>안내할까요?</b>
+      </>
+    ),
+    buttonLabel: "강남 리라 어린이집으로 가기",
+    emoji: "🧸",
+  },
+  default: {
+    message: (
+      <>
+        평일 오후 6시 30분 이네요!
+        <br />
+        오늘 하루도 고생하셨어요.
+        <br />
+        <b>집으로 안내할까요?</b>
+      </>
+    ),
+    buttonLabel: "자양동 우성아파트로 가기",
+    emoji: "🏠",
+  },
+};
+
+function RecommendationCard({ onNavigate, cluster }) {
+  const variant = CARD_VARIANTS[cluster] ?? CARD_VARIANTS.default;
+
   return (
     <motion.div
       initial={{ y: 80, opacity: 0 }}
@@ -302,23 +333,19 @@ function RecommendationCard({ onNavigate }) {
     >
       <div className="relative rounded-[15px] border border-slate-200 bg-white p-8 shadow-[0_0_8px_rgba(0,0,0,0.30)]">
         <div className="max-w-[360px] text-3xl font-medium leading-[1.28] tracking-[-1.5px] text-black">
-          평일 오후 6시 30분 이네요!
-          <br />
-          오늘 하루도 고생하셨어요.
-          <br />
-          <b>집으로 안내할까요?</b>
+          {variant.message}
         </div>
 
         <button
           onClick={onNavigate}
           className="mt-5 flex h-[43px] w-[315px] items-center justify-between rounded-md bg-blue-600 px-5 text-sm font-bold text-white active:scale-[0.98]"
         >
-          <span>자양동 우성아파트로 가기</span>
+          <span>{variant.buttonLabel}</span>
           <span className="text-2xl leading-none">→</span>
         </button>
 
         <div className="absolute bottom-5 right-8 text-[112px] leading-none">
-          🏠
+          {variant.emoji}
         </div>
       </div>
     </motion.div>
@@ -434,7 +461,7 @@ export default function HomeScreen({
       </div>
 
       <AnimatePresence>
-        {showCard && <RecommendationCard onNavigate={onNavigate} />}
+        {showCard && <RecommendationCard onNavigate={onNavigate} cluster={cluster} />}
       </AnimatePresence>
 
       <BottomNav />
