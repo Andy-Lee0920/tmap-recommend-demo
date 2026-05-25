@@ -334,7 +334,14 @@ function BottomNav() {
   );
 }
 
-export default function HomeScreen({ onNavigate, onSearch, showCard }) {
+const promoList = [
+  { segment: "parenting", reward: 30, partner: "쿠팡" },
+  { segment: "night", reward: 20, partner: "편의점" },
+  { segment: "airport", reward: 50, partner: "여행용품몰" },
+  { segment: "worker", reward: 40, partner: "일자리 플랫폼" },
+];
+
+export default function HomeScreen({ onNavigate, onSearch, showCard, cluster }) {
   return (
     <motion.div
       key="home"
@@ -342,17 +349,26 @@ export default function HomeScreen({ onNavigate, onSearch, showCard }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0, x: -40 }}
       transition={{ duration: 0.25 }}
-      className="absolute inset-0 bg-slate-50"
+      className="absolute inset-0 flex flex-col bg-slate-50"
     >
       <PhoneStatusBar />
-      <HomeSearchArea onSubmit={onSearch} />
-      <QuickInfo />
-      <CoinPromo segment="parenting" reward={30} partner="쿠팡" />
-      <CoinPromo segment="night" reward={20} partner="편의점" />
-      <CoinPromo segment="airport" reward={50} partner="여행용품몰" />
-      <CoinPromo segment="worker" reward={40} partner="일자리 플랫폼" />
-      <MenuGrid />
-      <SimilarReviews />
+      <div className="flex-1 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <HomeSearchArea onSubmit={onSearch} />
+        <QuickInfo />
+        {promoList.map((p) => (
+          <div key={p.segment} className={cluster === p.segment ? "" : "hidden"}>
+            <CoinPromo
+              segment={p.segment}
+              reward={p.reward}
+              partner={p.partner}
+              active
+            />
+          </div>
+        ))}
+        <MenuGrid />
+        <SimilarReviews />
+        <div className="h-[120px]" />
+      </div>
 
       <AnimatePresence>
         {showCard && <RecommendationCard onNavigate={onNavigate} />}

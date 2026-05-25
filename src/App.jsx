@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import { Clock } from "lucide-react";
+import { Clock, Users } from "lucide-react";
+
+const clusterOptions = [
+  { value: "parenting", label: "육아 관심 고객", emoji: "🧸" },
+  { value: "night", label: "야간 이동형 고객", emoji: "🌙" },
+  { value: "airport", label: "공항 방문 고객", emoji: "🧳" },
+  { value: "worker", label: "현장 근무 고객", emoji: "👷" },
+];
 import HomeScreen from "./screens/HomeScreen";
 import RouteScreen from "./screens/RouteScreen";
 import SearchResultScreen from "./screens/SearchResultScreen";
@@ -18,7 +25,8 @@ function usePhoneScale() {
     const updateScale = () => {
       const padding = 16;
       const availableHeight = window.innerHeight - padding;
-      const availableWidth = window.innerWidth - padding - PANEL_WIDTH - PANEL_GAP;
+      const availableWidth =
+        window.innerWidth - padding - PANEL_WIDTH - PANEL_GAP;
 
       const heightScale = availableHeight / BASE_PHONE_HEIGHT;
       const widthScale = availableWidth / BASE_PHONE_WIDTH;
@@ -38,6 +46,7 @@ export default function TmapNextDestinationMobileDemo() {
   const [screen, setScreen] = useState("home");
   const [showCard, setShowCard] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [cluster, setCluster] = useState("parenting");
   const scale = usePhoneScale();
 
   const handleSearch = (query) => {
@@ -63,6 +72,7 @@ export default function TmapNextDestinationMobileDemo() {
               <HomeScreen
                 key="home"
                 showCard={showCard}
+                cluster={cluster}
                 onSearch={handleSearch}
                 onNavigate={() => setScreen("route")}
               />
@@ -110,18 +120,34 @@ export default function TmapNextDestinationMobileDemo() {
         >
           <Clock className="h-5 w-5 shrink-0" />
           <div>
-            <div className={`text-2xs font-semibold ${showCard ? "text-blue-200" : "text-slate-400"}`}>
+            <div
+              className={`text-2xs font-semibold ${showCard ? "text-blue-200" : "text-slate-400"}`}
+            >
               시간 트리거
             </div>
             <div className="text-sm font-bold">오후 6:30 도착</div>
           </div>
         </button>
 
-        <p className="text-2xs leading-relaxed text-slate-500">
-          {showCard
-            ? "추천 카드가 표시 중입니다."
-            : "버튼을 누르면 퇴근 추천 카드가 앱에 표시됩니다."}
-        </p>
+        <div className="rounded-xl bg-slate-700 p-4">
+          <div className="mb-2.5 flex items-center gap-2">
+            <Users className="h-4 w-4 text-slate-400" />
+            <div className="text-2xs font-semibold text-slate-400">
+              고객 군집별 추천
+            </div>
+          </div>
+          <select
+            value={cluster}
+            onChange={(e) => setCluster(e.target.value)}
+            className="w-full cursor-pointer rounded-lg bg-slate-600 px-3 py-2 text-sm font-semibold text-slate-100 outline-none"
+          >
+            {clusterOptions.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.emoji} {opt.label}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
     </div>
   );
