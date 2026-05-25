@@ -491,23 +491,22 @@ const GAS_STATIONS = [
     title: "추천 주유소",
     name: "S-OIL 자양천 주유소",
     price: "경유 1,990원",
-    selected: true,
   },
   {
     title: "가장 저렴한 주유소",
     name: "S-OIL 자양 셀프 주유소",
     price: "경유 1,950원",
-    selected: false,
   },
   {
     title: "가장 가까운 주유소",
     name: "현대오일뱅크 자양 주유소",
     price: "경유 2,050원",
-    selected: false,
   },
 ];
 
 function GasStationBottomSheet() {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
   return (
     <motion.div
       initial={{ y: 260, opacity: 0 }}
@@ -520,17 +519,18 @@ function GasStationBottomSheet() {
         {GAS_STATIONS.map((station, i) => (
           <div
             key={i}
-            className={`flex items-center gap-4 py-3.5 ${
+            onClick={() => setSelectedIndex(i)}
+            className={`flex cursor-pointer items-center gap-4 py-3.5 ${
               i < GAS_STATIONS.length - 1 ? "border-b border-neutral-100" : ""
             }`}
           >
             {/* 라디오 버튼 */}
             <div
               className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 ${
-                station.selected ? "border-blue-500" : "border-neutral-300"
+                selectedIndex === i ? "border-blue-500" : "border-neutral-300"
               }`}
             >
-              {station.selected && (
+              {selectedIndex === i && (
                 <div className="h-2.5 w-2.5 rounded-full bg-blue-500" />
               )}
             </div>
@@ -554,7 +554,7 @@ function GasStationBottomSheet() {
               </div>
             </div>
 
-            {/* 가격 배지 - 글씨 크기 그대로 유지 */}
+            {/* 가격 배지 */}
             <div className="shrink-0 whitespace-nowrap rounded-[4px] bg-[#0068ff] px-2 py-1 text-sm font-bold text-white">
               {station.price}
             </div>
@@ -571,7 +571,7 @@ function GasStationBottomSheet() {
 // Main Screen Export
 // ─────────────────────────────────────────────
 export default function NavigationScreen({ onBack }) {
-  const [showGasSheet, setShowGasSheet] = useState(true);
+  const [showGasSheet, setShowGasSheet] = useState(false);
 
   return (
     <motion.div
