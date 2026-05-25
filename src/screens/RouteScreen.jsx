@@ -42,9 +42,7 @@ function RouteHeader({ onBack }) {
       <div className="flex h-[82px] items-center justify-between px-9 text-2xl font-semibold">
         <div className="flex h-[54px] min-w-[126px] items-center justify-center gap-2 rounded-full bg-blue-600 px-6 text-white">
           <span className="text-3xl leading-none">🚙</span>
-          <span className="text-3xl font-semibold tracking-[-1px]">
-            34분
-          </span>
+          <span className="text-3xl font-semibold tracking-[-1px]">34분</span>
         </div>
 
         <Bus
@@ -321,10 +319,10 @@ export default function RouteScreen({ onBack, onStartNav }) {
   return (
     <motion.div
       key="route"
-      initial={{ x: 584, opacity: 0.75 }}
-      animate={{ x: 0, opacity: 1 }}
-      exit={{ x: 584, opacity: 0 }}
-      transition={{ duration: 0.32, ease: "easeOut" }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, x: -40 }}
+      transition={{ duration: 0.25 }}
       className="absolute inset-0 bg-white"
     >
       <RouteHeader onBack={onBack} />

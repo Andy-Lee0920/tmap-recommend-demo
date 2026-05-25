@@ -576,10 +576,10 @@ export default function NavigationScreen({ onBack }) {
   return (
     <motion.div
       key="navigation"
-      initial={{ x: 584, opacity: 0.8 }}
-      animate={{ x: 0, opacity: 1 }}
-      exit={{ x: 584, opacity: 0 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, x: -40 }}
+      transition={{ duration: 0.25 }}
       className="absolute inset-0 overflow-hidden bg-[#f1eee5]"
     >
       <FakeNavMap />
