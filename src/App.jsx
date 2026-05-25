@@ -7,6 +7,7 @@ const clusterOptions = [
   { value: "night", label: "야간 이동형 고객", emoji: "🌙" },
   { value: "airport", label: "공항 방문 고객", emoji: "🧳" },
   { value: "worker", label: "현장 근무 고객", emoji: "👷" },
+  { value: "electronic", label: "전기차 고객", emoji: "🚘" },
 ];
 import HomeScreen from "./screens/HomeScreen";
 import RouteScreen from "./screens/RouteScreen";

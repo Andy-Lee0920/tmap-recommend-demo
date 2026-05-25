@@ -339,6 +339,7 @@ const promoList = [
   { segment: "night", reward: 20, partner: "편의점" },
   { segment: "airport", reward: 50, partner: "여행용품몰" },
   { segment: "worker", reward: 40, partner: "일자리 플랫폼" },
+  { segment: "electronic", reward: 100, partner: "무공해차 통합누리집" },
 ];
 
 export default function HomeScreen({

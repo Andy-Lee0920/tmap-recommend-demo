@@ -21,16 +21,9 @@ const promoMap = {
     cta: "야간 운전자 혜택 보기",
     defaultBit: "left",
   },
-
-  // 기존 segment와 호환용 alias
-  baby: {
-    image: "/image/baby_marketing.png",
-    cta: "육아 혜택 보기",
-    defaultBit: "right",
-  },
-  flight: {
-    image: "/image/flight_marketing.png",
-    cta: "여행 혜택 보기",
+  electronic: {
+    image: "/image/electronic_marketing.png",
+    cta: "무공해차 통합누리집",
     defaultBit: "right",
   },
 };
