@@ -341,7 +341,18 @@ const promoList = [
   { segment: "worker", reward: 40, partner: "일자리 플랫폼" },
 ];
 
-export default function HomeScreen({ onNavigate, onSearch, showCard, cluster }) {
+export default function HomeScreen({
+  onNavigate,
+  onSearch,
+  showCard,
+  cluster,
+}) {
+  const [closedPromo, setClosedPromo] = useState(null);
+
+  const visiblePromo = promoList.find((p) => p.segment === cluster);
+
+  const shouldShowPromo = visiblePromo && closedPromo !== visiblePromo.segment;
+
   return (
     <motion.div
       key="home"
@@ -352,19 +363,36 @@ export default function HomeScreen({ onNavigate, onSearch, showCard, cluster }) 
       className="absolute inset-0 flex flex-col bg-slate-50"
     >
       <PhoneStatusBar />
+
       <div className="flex-1 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         <HomeSearchArea onSubmit={onSearch} />
         <QuickInfo />
-        {promoList.map((p) => (
-          <div key={p.segment} className={cluster === p.segment ? "" : "hidden"}>
-            <CoinPromo
-              segment={p.segment}
-              reward={p.reward}
-              partner={p.partner}
-              active
-            />
-          </div>
-        ))}
+
+        <AnimatePresence>
+          {shouldShowPromo && (
+            <motion.div
+              key="coin-promo"
+              initial={{ opacity: 0, y: 12, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{
+                opacity: 0,
+                y: -10,
+                scale: 0.96,
+                height: 0,
+              }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="overflow-hidden"
+            >
+              <CoinPromo
+                segment={visiblePromo.segment}
+                reward={visiblePromo.reward}
+                partner={visiblePromo.partner}
+                onClose={() => setClosedPromo(visiblePromo.segment)}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         <MenuGrid />
         <SimilarReviews />
         <div className="h-[120px]" />

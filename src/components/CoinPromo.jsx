@@ -55,7 +55,7 @@ function CoinPromo({
         onClick={onClick}
         className={`
           relative h-[240px] overflow-hidden rounded-[28px]
-          bg-white s    hadow-[0_10px_30px_rgba(0,0,0,0.08)]
+          bg-white shadow-[0_10px_30px_rgba(0,0,0,0.08)]
           ${active ? "ring-[1px] ring-offset-2" : "ring-1 ring-black/5"}
           transition active:scale-[0.99]
         `}
