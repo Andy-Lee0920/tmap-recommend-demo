@@ -11,6 +11,7 @@ import {
   CircleUserRound,
   ChevronRight,
   Moon,
+  Info,
 } from "lucide-react";
 import PhoneStatusBar from "../components/PhoneStatusBar";
 import AndroidBar from "../components/AndroidBar";
@@ -258,6 +259,38 @@ function SimilarReviews() {
   );
 }
 
+// ─────────────────────────────────────────────
+// Ad Strip
+// ─────────────────────────────────────────────
+function PayAd() {
+  return (
+    <div className="px-5 pt-5">
+      <div className="flex items-center gap-3 border-y border-neutral-100 bg-neutral-50 px-4 py-4">
+        <div className="min-w-0 flex-1">
+          <div className="text-sm font-semibold text-blue-600">
+            Npay앱 다운받기 ›
+          </div>
+          <div className="mt-0.5 text-lg font-black tracking-[-0.5px] text-neutral-800">
+            네이버페이 X 삼성페이
+          </div>
+          <div className="mt-1 text-sm text-neutral-400">
+            <span className="rounded bg-neutral-300 px-1 py-px text-xs text-white">
+              AD
+            </span>{" "}
+            Moloco 광고입니다.
+          </div>
+        </div>
+        <div className="flex h-[58px] w-[108px] shrink-0 items-center justify-center rounded-[10px] bg-neutral-900">
+          <span className="text-xl font-black text-white">
+            <span className="text-[#03c75a]">N</span> pay
+          </span>
+        </div>
+        <Info className="h-[22px] w-[22px] shrink-0 text-neutral-300" />
+      </div>
+    </div>
+  );
+}
+
 function RecommendationCard({ onNavigate }) {
   return (
     <motion.div
@@ -396,6 +429,7 @@ export default function HomeScreen({
 
         <MenuGrid />
         <SimilarReviews />
+        <PayAd />
         <div className="h-[120px]" />
       </div>
 
