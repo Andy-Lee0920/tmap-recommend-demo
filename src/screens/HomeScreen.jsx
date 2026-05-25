@@ -5,7 +5,7 @@ import {
   Building2,
   Mic,
   Navigation,
-  X,
+  // X,
   MapPin,
   Star,
   CircleUserRound,
@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import PhoneStatusBar from "../components/PhoneStatusBar";
 import AndroidBar from "../components/AndroidBar";
+import CoinPromo from "../components/CoinPromo";
 
 function HomeSearchArea({ onSubmit }) {
   const [value, setValue] = useState("");
@@ -75,26 +76,26 @@ function QuickInfo() {
   );
 }
 
-function CoinPromo() {
-  return (
-    <div className="px-5">
-      <div className="relative h-[220px] rounded-[24px] bg-white shadow-sm">
-        <button className="absolute right-6 top-6 text-neutral-300">
-          <X className="h-6 w-6" />
-        </button>
-        <div className="flex h-full flex-col items-center justify-center pb-2">
-          <div className="mb-6 text-7xl leading-none">🪙</div>
-          <div className="text-center text-2xl font-extrabold tracking-[-0.7px] text-blue-700">
-            내 주변 맛집 한눈에 보기
-          </div>
-          <div className="mt-2 flex items-center text-lg font-medium tracking-[-0.6px] text-neutral-500">
-            구경만 해도 10원 적립돼요 <ChevronRight className="h-5 w-5" />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+// function CoinPromo() {
+//   return (
+//     <div className="px-5">
+//       <div className="relative h-[220px] rounded-[24px] bg-white shadow-sm">
+//         <button className="absolute right-6 top-6 text-neutral-300">
+//           <X className="h-6 w-6" />
+//         </button>
+//         <div className="flex h-full flex-col items-center justify-center pb-2">
+//           <div className="mb-6 text-7xl leading-none">🪙</div>
+//           <div className="text-center text-2xl font-extrabold tracking-[-0.7px] text-blue-700">
+//             내 주변 맛집 한눈에 보기
+//           </div>
+//           <div className="mt-2 flex items-center text-lg font-medium tracking-[-0.6px] text-neutral-500">
+//             구경만 해도 10원 적립돼요 <ChevronRight className="h-5 w-5" />
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
 
 const menuItems = [
   { icon: "🚗", label: "내비" },
@@ -248,9 +249,7 @@ function SimilarReviews() {
                 {review.text}
               </div>
 
-              <div className="mt-3 text-xs text-neutral-400">
-                {review.time}
-              </div>
+              <div className="mt-3 text-xs text-neutral-400">{review.time}</div>
             </div>
           ))}
         </div>
@@ -348,7 +347,10 @@ export default function HomeScreen({ onNavigate, onSearch, showCard }) {
       <PhoneStatusBar />
       <HomeSearchArea onSubmit={onSearch} />
       <QuickInfo />
-      <CoinPromo />
+      <CoinPromo segment="parenting" reward={30} partner="쿠팡" />
+      <CoinPromo segment="night" reward={20} partner="편의점" />
+      <CoinPromo segment="airport" reward={50} partner="여행용품몰" />
+      <CoinPromo segment="worker" reward={40} partner="일자리 플랫폼" />
       <MenuGrid />
       <SimilarReviews />
 
